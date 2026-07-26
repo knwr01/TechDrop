@@ -6,9 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProductController {
@@ -20,8 +18,22 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
+    public String home(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String sort,
+            Model model) {
+
+        if (keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("products", productService.searchProducts(keyword));
+        } else if (category != null && !category.isEmpty()) {
+            model.addAttribute("products", productService.getProductsByCategory(category));
+        } else if (sort != null && !sort.isEmpty()) {
+            model.addAttribute("products", productService.sortProducts(sort));
+        } else {
+            model.addAttribute("products", productService.getAllProducts());
+        }
+
         return "index";
     }
 
