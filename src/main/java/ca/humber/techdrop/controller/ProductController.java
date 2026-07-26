@@ -18,7 +18,17 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String home(
+    public String home() {
+        return "home";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/products")
+    public String products(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String sort,
@@ -53,6 +63,6 @@ public class ProductController {
         }
 
         productService.saveProduct(product);
-        return "redirect:/";
+        return "redirect:/products";
     }
 }

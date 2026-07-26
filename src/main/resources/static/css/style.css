@@ -1,0 +1,64 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.hero {
+    background-color: #212529;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-weight: bold;
+}
+
+.category-card {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #212529;
+    color: white;
+}
+
+.footer a {
+    color: #adb5bd;
+}
+
+table td, table th {
+    vertical-align: middle;
+}
+
+.about-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
