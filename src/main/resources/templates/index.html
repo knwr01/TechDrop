@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TechDrop Products</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>TechDrop Products</h1>
+
+        <a href="/add-product" class="btn btn-success">
+            Add Product
+        </a>
+    </div>
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <form method="get" action="/">
+                <input
+                        type="text"
+                        class="form-control"
+                        name="keyword"
+                        placeholder="Search products">
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="get" action="/">
+                <select class="form-select" name="category" onchange="this.form.submit()">
+                    <option value="">Filter by Category</option>
+                    <option value="Smartphones">Smartphones</option>
+                    <option value="Laptops">Laptops</option>
+                    <option value="Audio">Audio</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="get" action="/">
+                <select class="form-select" name="sort" onchange="this.form.submit()">
+                    <option value="">Sort By</option>
+                    <option value="name">Product Name (A-Z)</option>
+                    <option value="priceAsc">Price: Low to High</option>
+                    <option value="priceDesc">Price: High to Low</option>
+                </select>
+            </form>
+        </div>
+
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productId}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.brand}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stockQuantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
