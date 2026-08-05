@@ -65,4 +65,30 @@ public class ProductController {
         productService.saveProduct(product);
         return "redirect:/products";
     }
+
+    @GetMapping("/edit-product/{id}")
+    public String showEditProductForm(@PathVariable Long id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
+        return "edit-product";
+    }
+
+    @PostMapping("/edit-product/{id}")
+    public String editProduct(
+            @PathVariable Long id,
+            @Valid @ModelAttribute("product") Product product,
+            BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "edit-product";
+        }
+
+        productService.updateProduct(id, product);
+        return "redirect:/products";
+    }
+
+    @PostMapping("/delete-product/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return "redirect:/products";
+    }
 }
