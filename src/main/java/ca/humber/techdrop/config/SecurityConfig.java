@@ -19,20 +19,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/about", "/products", "/products/**",
                                 "/register", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+
+                        .requestMatchers("/admin").hasRole("ADMIN")
+
                         .requestMatchers("/delete-product/**").hasRole("ADMIN")
+
                         .requestMatchers("/add-product", "/add-product/**",
-                                "/edit-product", "/edit-product/**").hasAnyRole("ADMIN", "STAFF")
+                                "/edit-product", "/edit-product/**")
+                        .hasAnyRole("ADMIN", "STAFF")
+
                         .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
+
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
