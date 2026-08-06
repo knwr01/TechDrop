@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Admin Dashboard</h1>
+
+        <a href="/add-product" class="btn btn-success">
+            Add Product
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="product : ${products}">
+
+            <td th:text="${product.productId}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.brand}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stockQuantity}"></td>
+
+            <td>
+
+                <a th:href="@{/edit-product/{id}(id=${product.productId})}"
+                   class="btn btn-primary btn-sm">
+                    Edit
+                </a>
+
+                <form th:action="@{/delete-product/{id}(id=${product.productId})}"
+                      method="post"
+                      class="d-inline">
+
+                    <button type="submit"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this product?')">
+                        Delete
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <a href="/" class="btn btn-secondary">
+        Back to Home
+    </a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
