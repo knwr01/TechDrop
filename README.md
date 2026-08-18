@@ -4,11 +4,14 @@ Project Description
 
 TechDrop is an e-commerce web application for an online electronics store. Customers can browse products, search by category, add items to their shopping cart, place orders, and leave reviews.
 
-Team Members
+Team Contributions
 
-- Kanwarnoor Singh
-- Moteen Raza Bag
-- Shabnam Hajiyeva
+Kanwarnoor Singh - Worked on project integration and final configuration testing. Verified both the development (H2) and production (MySQL) profiles, resolved the H2 console security access issue, and tested the integrated application.
+
+Moteen Raza Bag - Implemented the Deliverable 3 YAML configuration and multi-profile setup, including the H2 development profile and MySQL production profile.
+
+Shabnam Hajiyeva - Contributed to the development and integration of the TechDrop application features.
+
 
 Technologies
 
