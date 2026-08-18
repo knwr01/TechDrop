@@ -1,0 +1,18 @@
+# Prod profile - real MySQL database.
+# Make sure a local MySQL server is running and a "techdrop" schema exists
+# (or set spring.datasource.url to point somewhere else).
+#
+# Username/password default to root/root below so it still runs out of the
+# box, but override them instead of editing this file:
+#   mvnw spring-boot:run -Dspring-boot.run.profiles=prod -DDB_USERNAME=root -DDB_PASSWORD=yourpassword
+# or set the DB_USERNAME / DB_PASSWORD environment variables.
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/techdrop
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+
+  jpa:
+    hibernate:
+      ddl-auto: update

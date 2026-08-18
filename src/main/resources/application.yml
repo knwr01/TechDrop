@@ -1,0 +1,28 @@
+# Common settings shared by every profile.
+# Profile-specific stuff (which database to use, etc.) goes in
+# application-dev.yml / application-prod.yml.
+
+spring:
+  application:
+    name: techdrop
+
+  # dev runs by default so anyone can clone the repo and just hit run,
+  # no MySQL install needed. Switch to prod with:
+  #   --spring.profiles.active=prod
+  # or -Dspring.profiles.active=prod
+  profiles:
+    active: dev
+
+  thymeleaf:
+    cache: false
+
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: always
