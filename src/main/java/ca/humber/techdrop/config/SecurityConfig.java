@@ -1,5 +1,6 @@
 package ca.humber.techdrop.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,16 +23,30 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/about", "/products", "/products/**",
-                                "/register", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+
+                        .requestMatchers(
+                                "/",
+                                "/about",
+                                "/products",
+                                "/products/**",
+                                "/register",
+                                "/login",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**"
+                        ).permitAll()
 
                         .requestMatchers("/admin").hasRole("ADMIN")
 
                         .requestMatchers("/delete-product/**").hasRole("ADMIN")
 
-                        .requestMatchers("/add-product", "/add-product/**",
-                                "/edit-product", "/edit-product/**")
-                        .hasAnyRole("ADMIN", "STAFF")
+                        .requestMatchers(
+                                "/add-product",
+                                "/add-product/**",
+                                "/edit-product",
+                                "/edit-product/**"
+                        ).hasAnyRole("ADMIN", "STAFF")
 
                         .anyRequest().authenticated()
                 )
@@ -46,6 +61,14 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
+                )
+
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers(PathRequest.toH2Console())
+                )
+
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.sameOrigin())
                 );
 
         return http.build();
